@@ -1,0 +1,49 @@
+﻿@typeparam Titem
+
+@if(MyList is null)
+{
+    @if(Loading is null)
+    {
+        <div class="align-items-center">
+            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7f9f5964-30db-43ff-9a72-6eb7763dbf7a/d4h3m8i-62cbf666-6701-4161-9cb6-8c4e50d95354.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzdmOWY1OTY0LTMwZGItNDNmZi05YTcyLTZlYjc3NjNkYmY3YVwvZDRoM204aS02MmNiZjY2Ni02NzAxLTQxNjEtOWNiNi04YzRlNTBkOTUzNTQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.lsd-mA5lJjk4EdEF26j-dvSbtVuov919F4EClr32D0U"/>
+        </div>
+    }
+    else
+    {
+        @Loading
+    }
+
+} 
+else if(MyList.Count == 0)
+{
+    @if(NoRecords is null)
+    {
+        <div class="align-items-center">
+            <p>No hay registros para mostrar</p>
+        </div>
+    }
+    else
+    {
+        @NoRecords
+    }
+}
+else
+{
+    @Body
+}
+
+@code {
+    [Parameter]
+    public RenderFragment? Loading { get; set; }
+
+    [Parameter]
+    public RenderFragment? NoRecords { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment Body { get; set; } = null!;
+
+    [Parameter]
+    [EditorRequired]
+    public List<Titem> MyList { get; set; } = null!;
+}
