@@ -1,0 +1,36 @@
+﻿@page "/products/create/{CategoryId:int}"
+@inject IRepository repository
+@inject NavigationManager navigationManager
+@inject SweetAlertService sweetAlertService
+
+<h3>Crear Producto</h3>
+
+<ProductForm @ref="productForm" Product="product" OnValidSubmit="CreateAsync" ReturnAction="Return" />
+
+@code {
+    private Product product = new();
+    private ProductForm? productForm;
+
+    [Parameter]
+    public int CategoryId { get; set; }
+
+    private async Task CreateAsync()
+    {
+        product.CategoryId = CategoryId;
+        var httpResponse = await repository.Post("/api/products", product);
+        if (httpResponse.Error)
+        {
+            var message = await httpResponse.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+
+        Return();
+    }
+
+    private void Return()
+    {
+        productForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo($"/categories/details/{CategoryId}");
+    }
+}
