@@ -36,6 +36,8 @@ else
                 <thead>
                     <tr>
                         <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
                         <th style="width:260px"></th>
                     </tr>
                 </thead>
@@ -45,6 +47,13 @@ else
                         <tr>
                             <td>
                                 @product.Name
+                            </td>
+                            <td>
+                                <label>$</label>
+                                @product.price
+                            </td>
+                            <td>
+                                @product.Stock
                             </td>
                             
                             <td>

@@ -7,9 +7,20 @@
     <DataAnnotationsValidator />
     <div class="mb-3">
         <label>Producto: </label>
+        <label>Nombre: </label>
         <div>
             <InputText class="form-control" @bind-Value="@Product.Name" />
             <ValidationMessage For="@(() => Product.Name)" />
+        </div>
+        <label>Precio: </label>
+        <div>
+            <InputNumber class="form-control" @bind-Value="@Product.price" />
+            <ValidationMessage For="@(() => Product.price)" />
+        </div>
+        <label>Stock: </label>
+        <div>
+            <InputNumber class="form-control" @bind-Value="@Product.Stock" />
+            <ValidationMessage For="@(() => Product.Stock)" />
         </div>
     </div>
     <button class="btn btn-primary" type="submit">Guardar Cambios</button>

@@ -19,6 +19,37 @@ namespace Sales.Shared.Entities
 
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
-       
+
+        
+        private decimal Price;
+        [Display(Name = "precio")]
+        [Required(ErrorMessage = "El campo {1} es obligatorio.")]
+        public decimal price 
+        {
+            get { return Price; }
+            set
+            {
+                if (value >= 0)
+                    Price = value;
+                else
+                    throw new ArgumentOutOfRangeException("Price", "El precio no puede ser menor que 0.");
+            }
+        }
+
+        [Display(Name = "Stock")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        private int stock;
+        public int Stock
+        {
+            get { return stock; }
+            set
+            {
+                if (value >= 0)
+                    stock = value;
+                else
+                    throw new ArgumentOutOfRangeException("Stock", "El stock no puede ser menor que 0.");
+            }
+        }
+
     }
 }
